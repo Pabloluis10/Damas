@@ -1,3 +1,4 @@
+package src;
 import src.juego.Juego;
 
 public class Principal {

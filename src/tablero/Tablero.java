@@ -26,11 +26,11 @@ public class Tablero {
                 if(i==0 && j==0){
                     tablero[i][j] = "     ";
                 }else if(i == 0){ //para indicar el número de cada columna
-                    tablero[i][j] = "  "+(j+1)+"  ";
+                    tablero[i][j] = "  "+(j)+"  ";
                 } else if (j == 0 ){ //indica el número de fila
-                    tablero[i][j]="  "+(j+1)+"  "; 
-                } else{
-                   if((i%2==0) && (j%2==0)){
+                    tablero[i][j]="  "+(i)+"  "; 
+                } else {
+                   if(i%2==0 && j%2==0){
                        if(llenoFichasBlancas < cantFichasBlancas){
                            tablero[i][j] = FONDO_NEGRO+LETRA_BLANCA+"| 0 |"+NORMAL;
                            llenoFichasBlancas++;

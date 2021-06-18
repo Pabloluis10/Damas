@@ -1,17 +1,15 @@
 package src.tablero;
 
+
+
 public class Tablero {
     //atributos
     private String [][] tablero = new String[9][9];
     private int cantFichasBlancas;//fichas blancas son 0
     private int cantFichasNegras;//fichas negras son x
 
-    //colores
-    public static final String NORMAL = "\u001B[0m";
-    public static final String FONDO_NEGRO = "\033[40m";
-    public static final String FONDO_BLANCO = "\033[47m";
-    public static final String LETRA_NEGRA = "\033[30m";
-    public static final String LETRA_BLANCA = "\033[37m";
+    private final String cuadroBlanco = "\033[47m"+"\033[30m"+"|   |"+"\u001B[0m";
+    private final String cuadroNegro = "\033[40m"+"\033[37m"+"|   |"+"\u001B[0m";
 
     public Tablero(){
         cantFichasBlancas=12;
@@ -30,22 +28,45 @@ public class Tablero {
                 } else if (j == 0 ){ //indica el número de fila
                     tablero[i][j]="  "+(i)+"  "; 
                 } else {
-                   if(i%2==0 && j%2==0){
-                       if(llenoFichasBlancas < cantFichasBlancas){
-                           tablero[i][j] = FONDO_NEGRO+LETRA_BLANCA+"| 0 |"+NORMAL;
-                           llenoFichasBlancas++;
-                       } else {
-                           tablero[i][j] = FONDO_NEGRO+LETRA_BLANCA+"|   |"+NORMAL;
-                       }
-                   } else {
-                       if(llenoFichasNegras < cantFichasNegras){
-                           tablero[i][j] = FONDO_BLANCO+LETRA_NEGRA+"| X |"+NORMAL;
-                           llenoFichasNegras++;
-                       }else{
-                        tablero[i][j] = FONDO_BLANCO+LETRA_NEGRA+"|   |"+NORMAL;
-                       }
-                   }
-                } 
+                    //pintar celdas 
+                    if(i%2 != 0){//fila impar
+                        if(j%2 != 0){//columna impar
+                            if(llenoFichasBlancas<12){
+                                tablero[i][j] ="\033[40m"+"\033[37m"+"| X |"+"\u001B[0m";
+                                llenoFichasBlancas++;
+                            } else {
+                                 tablero[i][j] = cuadroNegro;
+                            }
+                        } else {
+                            if(i>=6){
+                                if(llenoFichasNegras<12){
+                                    tablero[i][j] ="\033[47m"+"\033[30m"+"| 0 |"+"\u001B[0m";
+                                    llenoFichasNegras++;
+                                } 
+                            } else {
+                                tablero[i][j] = cuadroBlanco;
+                           }
+                        }     
+                    } else {//fila par
+                        if(j%2 == 0){
+                            if(llenoFichasBlancas<12){
+                                tablero[i][j] ="\033[40m"+"\033[37m"+"| X |"+"\u001B[0m";
+                                llenoFichasBlancas++;
+                            } else {
+                                 tablero[i][j] = cuadroNegro;
+                            }
+                        } else {
+                            if(i>=6){
+                                if(llenoFichasNegras<12){
+                                    tablero[i][j] ="\033[47m"+"\033[30m"+"| 0 |"+"\u001B[0m";
+                                    llenoFichasNegras++;
+                                }
+                            } else {
+                                tablero[i][j] = cuadroBlanco;
+                           }
+                        }
+                    }
+                }
             }
         }
     }

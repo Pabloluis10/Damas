@@ -1,4 +1,4 @@
-package jugadores;
+package src.jugadores;
 
 public class Jugador {
     //atributos

@@ -32,11 +32,9 @@ public class Tablero {
     }
 
     public void verificarLanzamiento(int posX, int posY, int x, int y){
-        int cantAvanzdado;
         if(turno0){ // turno de las fichas 0
             if(tablero[posX][posY] == cuadroNegroCon0){// verifica que sea una ficha negra;
-                cantAvanzdado = cantidadCasillasAvanzadas(posX, posY, x, y);
-
+                realizarLanzamiento(posX, posY, x, y);
             } else {
                 System.out.println("!ERROR¡ movimiento invalido\n");
             }
@@ -45,6 +43,23 @@ public class Tablero {
 
         }
     }
+
+    public void realizarLanzamiento(int posX, int posY, int x, int y) {
+        int cantAvanzado = cantidadCasillasAvanzadas(posX, posY, x, y);
+        if(cantAvanzado == 1){
+
+        }
+    }
+
+    public void moverFicha1Pos(int posX, int posY, int x, int y){
+        String aux;
+        //realizamos el movimiento
+        if(tablero[x][y] == cuadroNegro){
+            aux = tablero[posX][posY];
+            
+        }
+    }
+
     //verificamos cuantas posiciones avanzara el jugador
     public int cantidadCasillasAvanzadas(int posX, int posY, int x, int y){
         int diferenciaX = posX - x;
@@ -58,11 +73,7 @@ public class Tablero {
         }
     }
 
-    public void moverFicha1Posicion() {
-
-    }
-
-    public void iniciarTablero() {
+    private void iniciarTablero() {
 
         turno0 = true;
         

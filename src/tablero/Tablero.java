@@ -31,27 +31,48 @@ public class Tablero {
 
     public void verificarLanzamiento(int posX, int posY, int x, int y){
         if(turno0){ // turno de las fichas 0
-            if(tablero[posX][posY] == cuadroNegroCon0){// verifica que sea una ficha negra;
+            if(tablero[posX][posY] == cuadroNegroCon0){// verifica que sea una ficha 0;
                 realizarLanzamiento(posX, posY, x, y);
             } else {
                 System.out.println("!ERROR¡ movimiento invalido\n");
             }
             turno0 = false; // cambia el turno para X
         } else { //turno de las fichas X
-
+            if(tablero[posX][posY] == cuadroNegroConX){// verifica que sea una ficha X;
+                realizarLanzamiento(posX, posY, x, y);
+            } else {
+                System.out.println("!ERROR¡ movimiento invalido\n");
+            }
+            turno0 = true; // cambia el turno para 0
         }
+        System.out.println("");
     }
 
-    public void realizarLanzamiento(int posX, int posY, int x, int y) {
+    private void realizarLanzamiento(int posX, int posY, int x, int y) {
         int cantAvanzado = cantidadCasillasAvanzadas(posX, posY, x, y);
         if(cantAvanzado == 1){
             moverFicha1Pos(posX, posY, x, y);
         } else if (cantAvanzado == 2){
-
+            moverFicha2Pos(posX, posY, x, y);
+        } else {
+            System.out.println("¡ERROR! El movimiento es invalido");
         }
     }
 
-    public void moverFicha1Pos(int posX, int posY, int x, int y){
+    //verificamos cuantas posiciones avanzara el jugador
+    private int cantidadCasillasAvanzadas(int posX, int posY, int x, int y){
+        int diferenciaX = posX - x;
+        int diferenciaY = posY - y;
+        if((diferenciaX == 1 || diferenciaX == -1) && (diferenciaY == 1 || diferenciaY == -1)){
+            return 1;
+        } else if ((diferenciaX == 2 || diferenciaX == -2) && (diferenciaY == 2 || diferenciaY == -2)){
+            return 2;
+        } else {
+            return 0;
+        }
+    }
+
+    private void moverFicha1Pos(int posX, int posY, int x, int y){
         String aux;
         //realizamos el movimiento
         if(tablero[x][y] == cuadroNegro){
@@ -63,7 +84,7 @@ public class Tablero {
         }
     }
 
-    public void moverFicha2Pos(int posX, int posY, int x, int y){
+    private void moverFicha2Pos(int posX, int posY, int x, int y){
         String aux;
         int direccionX = x-posX;
         int direccionY = y-posY;
@@ -134,19 +155,6 @@ public class Tablero {
         }
     }
 
-    //verificamos cuantas posiciones avanzara el jugador
-    public int cantidadCasillasAvanzadas(int posX, int posY, int x, int y){
-        int diferenciaX = posX - x;
-        int diferenciaY = posY - y;
-        if((diferenciaX == 1 || diferenciaX == -1) && (diferenciaY == 1 || diferenciaY == -1)){
-            return 1;
-        } else if ((diferenciaX == 2 || diferenciaX == -2) && (diferenciaY == 2 || diferenciaY == -2)){
-            return 2;
-        } else {
-            return 0;
-        }
-    }
-
     private void iniciarTablero() {
         //inicializamos los atributos del tablero
         turno0 = true;
@@ -200,5 +208,17 @@ public class Tablero {
                 }
             }
         }
+    }
+
+    public int getCantFichasX(){
+        return cantFichasX;
+    }
+
+    public int getCantFichas0(){
+        return cantFichas0;
+    }
+
+    public boolean getTurno0(){
+        return turno0;
     }
 }

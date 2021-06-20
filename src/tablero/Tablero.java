@@ -5,9 +5,12 @@ package src.tablero;
 public class Tablero {
     //atributos
     private String [][] tablero = new String[9][9];
+    private boolean turno0;
     private int cantFichasX;//fichas blancas son 0
     private int cantFichas0;//fichas negras son x
 
+    private final String cuadroNegroConX = "\033[40m"+"\033[37m"+" X "+"\u001B[0m";
+    private final String cuadroNegroCon0 = "\033[40m"+"\033[37m"+" 0 "+"\u001B[0m";
     private final String cuadroBlanco = "\033[47m"+"\033[30m"+"   "+"\u001B[0m";
     private final String cuadroNegro = "\033[40m"+"\033[37m"+"   "+"\u001B[0m";
 
@@ -28,7 +31,40 @@ public class Tablero {
 
     }
 
-    public void iniciarTablero(){
+    public void verificarLanzamiento(int posX, int posY, int x, int y){
+        int cantAvanzdado;
+        if(turno0){ // turno de las fichas 0
+            if(tablero[posX][posY] == cuadroNegroCon0){// verifica que sea una ficha negra;
+                cantAvanzdado = cantidadCasillasAvanzadas(posX, posY, x, y);
+
+            } else {
+                System.out.println("!ERROR¡ movimiento invalido\n");
+            }
+            turno0 = false;
+        } else { //turno de las fichas X
+
+        }
+    }
+    //verificamos cuantas posiciones avanzara el jugador
+    public int cantidadCasillasAvanzadas(int posX, int posY, int x, int y){
+        int diferenciaX = posX - x;
+        int diferenciaY = posY - y;
+        if((diferenciaX == 1 || diferenciaX == -1) && (diferenciaY == 1 || diferenciaY == -1)){
+            return 1;
+        } else if ((diferenciaX == 2 || diferenciaX == -2) && (diferenciaY == 2 || diferenciaY == -2)){
+            return 2;
+        } else {
+            return 0;
+        }
+    }
+
+    public void moverFicha1Posicion() {
+
+    }
+
+    public void iniciarTablero() {
+
+        turno0 = true;
         
         int fichasX=1;
         int fichas0 =1;
@@ -48,10 +84,10 @@ public class Tablero {
                     if(i%2 != 0){ //fila impar
                         if(j%2 != 0){ //columna impar
                             if(fichasX<=12){
-                                tablero[i][j] ="\033[40m"+"\033[37m"+" X "+"\u001B[0m";
+                                tablero[i][j] = cuadroNegroConX;
                                 fichasX++;
                             } else if(i>=6 && fichas0<=12){
-                                tablero[i][j] ="\033[40m"+"\033[37m"+" 0 "+"\u001B[0m";
+                                tablero[i][j] = cuadroNegroCon0;
                                 fichas0++;
                             } else{ 
                                  tablero[i][j] = cuadroNegro;
@@ -63,10 +99,10 @@ public class Tablero {
                     } else { //fila par
                         if(j%2 == 0){ //columna par
                             if(fichasX<=12){
-                                tablero[i][j] ="\033[40m"+"\033[37m"+" X "+"\u001B[0m";
+                                tablero[i][j] = cuadroNegroConX;
                                 fichasX++;
                             } else if (i>=6 && fichas0<=12){
-                                tablero[i][j] ="\033[40m"+"\033[37m"+" 0 "+"\u001B[0m";
+                                tablero[i][j] =cuadroNegroCon0;
                                 fichas0++;
                             } else {
                                  tablero[i][j] = cuadroNegro;

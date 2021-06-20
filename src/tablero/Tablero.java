@@ -15,9 +15,7 @@ public class Tablero {
     private final String cuadroNegro = "\033[40m"+"\033[37m"+"   "+"\u001B[0m";
 
     public Tablero(){
-        cantFichasX = 12;
-        cantFichas0 = 12;
-        iniciarTablero();
+                iniciarTablero();
     }
 
     public void dibujarTablero(){
@@ -38,7 +36,7 @@ public class Tablero {
             } else {
                 System.out.println("!ERROR¡ movimiento invalido\n");
             }
-            turno0 = false;
+            turno0 = false; // cambia el turno para X
         } else { //turno de las fichas X
 
         }
@@ -47,6 +45,8 @@ public class Tablero {
     public void realizarLanzamiento(int posX, int posY, int x, int y) {
         int cantAvanzado = cantidadCasillasAvanzadas(posX, posY, x, y);
         if(cantAvanzado == 1){
+            moverFicha1Pos(posX, posY, x, y);
+        } else if (cantAvanzado == 2){
 
         }
     }
@@ -56,7 +56,81 @@ public class Tablero {
         //realizamos el movimiento
         if(tablero[x][y] == cuadroNegro){
             aux = tablero[posX][posY];
-            
+            tablero[posX][posY] = cuadroNegro;
+            tablero[x][y] = aux;
+        } else {
+            System.out.println("!ERROR! Movimiento invalido");
+        }
+    }
+
+    public void moverFicha2Pos(int posX, int posY, int x, int y){
+        String aux;
+        int direccionX = x-posX;
+        int direccionY = y-posY;
+        if(turno0){
+            if(direccionX==2 && direccionY==2 && tablero[posX+1][posY+1] == cuadroNegroConX && tablero[x][y]==cuadroNegro ){//verificamos que haya una ficha contraria
+                 //realizamos el cambio
+                aux = tablero[posX][posY];
+                tablero[posX+1][posY+1] = cuadroNegro;//eliminamos la ficha contraria
+                cantFichasX--;
+                tablero[posX][posY] = cuadroNegro;
+                tablero[x][y] = aux; 
+            } else if(direccionX==-2 && direccionY==2 && tablero[posX-1][posY+1]== cuadroNegroConX && tablero[x][y]==cuadroNegro){
+                 //realizamos el cambio
+                aux = tablero[posX][posY];
+                tablero[posX-1][posY+1] = cuadroNegro;//eliminamos la ficha contrarira
+                cantFichasX--;
+                tablero[posX][posY] = cuadroNegro;
+                tablero[x][y] = aux;
+            } else if(direccionX==2 && direccionY==-2 && tablero[posX+1][posY-1]==cuadroNegroConX && tablero[x][y]==cuadroNegro){
+                //realizamos el cambio
+                aux = tablero[posX][posY];
+                tablero[posX+1][posY-1] = cuadroNegro;//eliminamos la ficha contraria
+                cantFichasX--;
+                tablero[posX][posY] = cuadroNegro;
+                tablero[x][y] = aux;
+            } else if(direccionX==-2 && direccionY==-2 && tablero[posX-1][posY-1]==cuadroNegroConX && tablero[x][y]==cuadroNegro){
+                //realizamos el cambio
+                aux = tablero[posX][posY];
+                tablero[posX-1][posY-1] = cuadroNegro;//eliminamos la ficha contraria
+                cantFichasX--;
+                tablero[posX][posY] = cuadroNegro;
+                tablero[x][y] = aux;
+            } else {
+                System.out.println("¡ERROR! El movimiento es invalido");
+            }
+        } else {
+            if(direccionX==2 && direccionY==2 && tablero[posX+1][posY+1] == cuadroNegroCon0 && tablero[x][y]==cuadroNegro ){//verificamos que haya una ficha contraria
+                //realizamos el cambio
+               aux = tablero[posX][posY];
+               tablero[posX+1][posY+1] = cuadroNegro;//eliminamos la ficha contraria
+               cantFichas0--;
+               tablero[posX][posY] = cuadroNegro;
+               tablero[x][y] = aux; 
+           } else if(direccionX==-2 && direccionY==2 && tablero[posX-1][posY+1]== cuadroNegroCon0 && tablero[x][y]==cuadroNegro){
+                //realizamos el cambio
+               aux = tablero[posX][posY];
+               tablero[posX-1][posY+1] = cuadroNegro;//eliminamos la ficha contrarira
+               cantFichas0--;
+               tablero[posX][posY] = cuadroNegro;
+               tablero[x][y] = aux;
+           } else if(direccionX==2 && direccionY==-2 && tablero[posX+1][posY-1]==cuadroNegroCon0 && tablero[x][y]==cuadroNegro){
+               //realizamos el cambio
+               aux = tablero[posX][posY];
+               tablero[posX+1][posY-1] = cuadroNegro;//eliminamos la ficha contraria
+               cantFichas0--;
+               tablero[posX][posY] = cuadroNegro;
+               tablero[x][y] = aux;
+           } else if(direccionX==-2 && direccionY==-2 && tablero[posX-1][posY-1]==cuadroNegroCon0 && tablero[x][y]==cuadroNegro){
+               //realizamos el cambio
+               aux = tablero[posX][posY];
+               tablero[posX-1][posY-1] = cuadroNegro;//eliminamos la ficha contraria
+               cantFichas0--;
+               tablero[posX][posY] = cuadroNegro;
+               tablero[x][y] = aux;
+           } else {
+               System.out.println("¡ERROR! El movimiento es invalido");
+           }
         }
     }
 
@@ -74,12 +148,13 @@ public class Tablero {
     }
 
     private void iniciarTablero() {
-
+        //inicializamos los atributos del tablero
         turno0 = true;
-        
+        cantFichasX = 12;
+        cantFichas0 = 12;
+
         int fichasX=1;
         int fichas0 =1;
-
         //llenamos el tablero por primera vez
         for(int i=0; i<9; i++){
             for(int j=0; j<9; j++){

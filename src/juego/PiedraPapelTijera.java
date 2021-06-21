@@ -1,7 +1,5 @@
 package src.juego;
 
-import java.util.Random;
-
 import src.jugadores.Jugador;
 
 public class PiedraPapelTijera {
@@ -9,8 +7,8 @@ public class PiedraPapelTijera {
    Jugador jugador1;
    Jugador jugador2;
 
-   public PiedraPapelTijera(Jugador seleccionado1, Jugador seleccionado2){
-        jugar(seleccionado1, seleccionado2);
+   public PiedraPapelTijera(Jugador a, Jugador b){
+        jugar(a, b);
    }
 
    private void jugar(Jugador a, Jugador b){
@@ -60,5 +58,13 @@ public class PiedraPapelTijera {
                System.out.println("Empate.");
            }
        }while(random1 == random2);
+    }
+
+    public Jugador getJugador1(){
+        return jugador1;
+    }
+
+    public Jugador getJugador2(){
+        return jugador2;
     }
 }

@@ -14,9 +14,14 @@ public class VectorJugadores {
 
     public void ingresarJugador(){
         System.out.println("\n\n==================== Ingresar Jugador ====================");
+        if(posLibre == 10){
+            System.out.println("Limite alcanzado, ya no puede ingresar jugadores");
+            return;
+        }
         System.out.print("Ingrese el nombre del jugador: ");
         String nombre = entrada.nextLine();
         jugadores[posLibre] = new Jugador(nombre);
+        posLibre++;
     }
 
     public Jugador seleccionarJugador( ) {
@@ -44,7 +49,7 @@ public class VectorJugadores {
     }  
 
     private void ordenarJugadores( ) {
-        System.out.println("\nLos jugadore se ordenan de mayor a menor según partidas ganadas");
+        System.out.println("\nLos jugadore se ordenan de mayor a menor según partidas ganadas\n");
         for(int i=0; i<posLibre; i++){
             Jugador aux = jugadores[i];
             int pos=i;

@@ -76,53 +76,32 @@ public class Juego {
                 System.out.println("Vuelva a ingresar los datos");
             }
         }while((filaDesea<1 || filaDesea>8) || (columnaDesea<1 || columnaDesea>8));//si el usuario no ingresa valores enre 1 y 8 ambos números incluidos
-
+        
+        tableroJuego.verificarLanzamiento(fila, columna, filaDesea, columnaDesea);//verifica y realiza los movimientos
+        verificarganador();
     }
 
-    public Juego(){
-        Scanner entrada = new Scanner(System.in);
-        boolean noHayGanador = true;
-        int posX, posY, x, y;
-
-        tableroJuego.dibujarTablero();
-        do{
-            if(tableroJuego.getTurno0()){
-                System.out.println("Turno de las fichas 0");
-                System.out.println("Ingrese la posición de la ficha 0 que desea mover.");
-            } else {
-                System.out.println("Turno de las fichas X");
-                System.out.println("Ingrese la posición de la ficha X que desea mover.");
+    public void verificarganador(){
+        if(!tableroJuego.getTurno0()){
+            if(tableroJuego.getCantFichasX()==0){
+                noHayGanador = false;
+                System.out.println("==================== FIN DE LA PARTIDA ====================");
+                System.out.println("\n<<<<< GANADOR: "+jugador1.getNombre()+">>>>>");
+                System.out.println("////////// FELICIDADES!!! \\\\\\\\\\\\\\\\\\\\");
+                //control de partidas de los jugdores
+                jugador1.aumetarPartidasGanadas();
+                jugador2.aumetarPartidasPerdidas();
+            } 
+        } else {
+            if(tableroJuego.getCantFichas0()==0){
+                noHayGanador = false;
+                System.out.println("==================== FIN DE LA PARTIDA ====================");
+                System.out.println("\n<<<<< GANADOR: "+jugador2.getNombre()+">>>>>");
+                System.out.println("////////// FELICIDADES!!! \\\\\\\\\\\\\\\\\\\\");
+                //control de partidas de los jugdores
+                jugador2.aumetarPartidasGanadas();
+                jugador1.aumetarPartidasPerdidas();
             }
-                
-                System.out.println("Fila: ");
-                posX = entrada.nextInt();
-                
-                System.out.println("columna: ");
-                
-                posY = entrada.nextInt();
-                
-                System.out.println("Ingrese la posición a la que desea mover la ficha");
-                System.out.print("posición x: ");
-                x = entrada.nextInt();
-                
-                System.out.print("Posición y: ");
-                y = entrada.nextInt();
-               
-/*Aqui me quede*/  tableroJuego.verificarLanzamiento(posX, posY, x, y);
-                //verificamos si hay ganador
-                tableroJuego.dibujarTablero();
-                if(!tableroJuego.getTurno0()){
-                    if(tableroJuego.getCantFichasX()==0){
-                        noHayGanador = false;
-                        System.out.println("Gano fichas 0");
-                    } 
-                } else {
-                    if(tableroJuego.getCantFichas0()==0){
-                        noHayGanador = false;
-                        System.out.println("Gano fichas X");
-                    }
-                }
-        }while(noHayGanador);
-
+        }
     }
 }

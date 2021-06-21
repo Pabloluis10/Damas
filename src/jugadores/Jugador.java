@@ -14,7 +14,7 @@ public class Jugador {
     }
 
     public String mostrarInfo(){
-        return "Nombre: "+nombre+" Partidas Ganadas: "+partidasGanadas+" Partidas Perdidas: "+partidasPerdidas;
+        return "Nombre: '"+nombre+"' Partidas Ganadas: '"+partidasGanadas+"' Partidas Perdidas: '"+partidasPerdidas+"'";
     }
 
     public void setNombre(String nombre){

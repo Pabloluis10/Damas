@@ -31,6 +31,10 @@ public class Jugador {
 
     public void aumetarPartidasPerdidas(){
         partidasPerdidas++;
-    }   
+    }
+    
+    public int getPartidasGanadas(){
+        return partidasGanadas;
+    }
 }
 

@@ -1,7 +1,5 @@
 package src.tablero;
 
-
-
 public class Tablero {
     //atributos
     private String [][] tablero = new String[9][9];
@@ -15,7 +13,7 @@ public class Tablero {
     private final String cuadroNegro = "\033[40m"+"\033[37m"+"   "+"\u001B[0m";
 
     public Tablero(){
-                iniciarTablero();
+        iniciarTablero();
     }
 
     public void dibujarTablero(){

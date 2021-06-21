@@ -29,19 +29,6 @@ public class VectorJugadores {
         return jugadores[num];
     }
 
-    private void ordenarJugadores( ) {
-        System.out.println("\nLos jugadore se ordenan de mayor a menor según partidas ganadas");
-        for(int i=0; i<posLibre; i++){
-            Jugador aux = jugadores[i];
-            int pos=i;
-            while(pos>0 && jugadores[pos-1].getPartidasGanadas() < aux.getPartidasGanadas()){
-                jugadores[pos] = jugadores[pos-1];
-                pos--;
-            }
-            jugadores[pos]=aux;
-        }
-    }
-
     public void mostraJugadores(){
         for (int i=0; i<posLibre; i++) {
             System.out.println((i+1)+") "+jugadores[i].getNombre());
@@ -55,4 +42,17 @@ public class VectorJugadores {
             System.out.println(jugadores[i].mostrarInfo());
         }
     }  
+
+    private void ordenarJugadores( ) {
+        System.out.println("\nLos jugadore se ordenan de mayor a menor según partidas ganadas");
+        for(int i=0; i<posLibre; i++){
+            Jugador aux = jugadores[i];
+            int pos=i;
+            while(pos>0 && jugadores[pos-1].getPartidasGanadas() < aux.getPartidasGanadas()){
+                jugadores[pos] = jugadores[pos-1];
+                pos--;
+            }
+            jugadores[pos]=aux;
+        }
+    }
 }

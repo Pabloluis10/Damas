@@ -27,7 +27,7 @@ public class Juego {
                 posX = entrada.nextInt();
                 
                 System.out.println("columna: ");
-                entrada.nextLine();
+                
                 posY = entrada.nextInt();
                 
                 System.out.println("Ingrese la posición a la que desea mover la ficha");
